@@ -1,2 +1,2 @@
 # platinum-orchid
-A game for the original Game Boy made during the Global Game Jam 2020.
+A game for the original Game Boy, made during and for the Global Game Jam 2020.
