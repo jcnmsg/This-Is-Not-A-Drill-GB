@@ -10,7 +10,6 @@ void splash(){
     fadeout();
     set_bkg_data(0x01, splash_tiles, splash_dat); 
     set_bkg_tiles(0, 0, splash_cols, splash_rows, splash_map);
-    move_bkg(0,0);
     fadein();
     waitpad(J_A);
     fadeout();
