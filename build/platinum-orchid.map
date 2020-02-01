@@ -18,36 +18,36 @@ AREA .  .ABS.
 		s__SFR	0000
 		l__GSINITTAIL	0001
 		l__BSS	005C
-		l__DATA	00D9
+		l__DATA	00B1
 		l__HOME	01AC
 		l__HEADER	01E1
 		s__CODE	0200
-		l__BASE	02F2
-		l__GSINIT	0387
+		l__GSINIT	02CB
+		l__BASE	02DC
 		l__CODE_1	0671
-		l__CODE	17E6
-		s__HOME	19E6
-		s__BASE	1B92
-		s__LIT	1E84
-		s__GSINIT	1E84
-		s__GSINITTAIL	220B
-		s__GSFINAL	220C
+		l__CODE	1896
+		s__HOME	1A96
+		s__BASE	1C42
+		s__LIT	1F1E
+		s__GSINIT	1F1E
+		s__GSINITTAIL	21E9
+		s__GSFINAL	21EA
 		s__CODE_1	4000
 		.OAM	C000
 		s__DATA	C0A0
-		s__BSS	C179
-		s__HEAP	C1D5
-		s__BSEG	C1D5
-		s__ISEG	C1D5
-		s__XSEG	C1D5
-		s__OVERLAY	C1D5
+		s__BSS	C151
+		s__HEAP	C1AD
+		s__BSEG	C1AD
+		s__ISEG	C1AD
+		s__XSEG	C1AD
+		s__OVERLAY	C1AD
 		.STACK	E000
 		.refresh_OAM	FF80
 		l__SFR	10000
 AREA _CODE
 	RADIX HEX
 	BASE 0200
-	SIZE 17E6
+	SIZE 1896
 	ATTRIB REL CON
 	GLOBALS
 		_cicled_delay	0200
@@ -58,21 +58,21 @@ AREA _CODE
 		_splash_dat	034A
 		_splash_map	0B9A
 		_Bg	0D02
-		_Player	1102
-		_Hammer	1242
-		_process_player_position	12A2
-		_detect_scroll	12A3
-		_process_input	134F
-		_animate_player	1557
-		_init	171D
-		_main	17B8
-		gbt_get_pattern_ptr	17E4
-		_gbt_play	1801
-		_gbt_pause	18BC
-		_gbt_loop	18C8
-		_gbt_stop	18CF
-		_gbt_enable_channels	18DA
-		_gbt_update	18E1
+		_BgTiles	1102
+		_Player	11E2
+		_Hammer	1322
+		_process_player_position	13C2
+		_process_input	13C3
+		_animate_player	15CB
+		_init	1791
+		_main	1868
+		gbt_get_pattern_ptr	1894
+		_gbt_play	18B1
+		_gbt_pause	196C
+		_gbt_loop	1978
+		_gbt_stop	197F
+		_gbt_enable_channels	198A
+		_gbt_update	1991
 AREA _HEADER
 	RADIX HEX
 	BASE 0000
@@ -82,204 +82,203 @@ AREA _HEADER
 		_exit	01D2
 AREA _HOME
 	RADIX HEX
-	BASE 19E6
+	BASE 1A96
 	SIZE 01AC
 	ATTRIB REL CON
 	GLOBALS
-		.set_mode	19E6
-		.remove_VBL	19F6
-		.remove_LCD	19FC
-		.remove_TIM	1A02
-		.remove_SIO	1A08
-		.remove_JOY	1A0E
-		.add_VBL	1A14
-		.add_LCD	1A1A
-		.add_TIM	1A20
-		.add_SIO	1A26
-		.add_JOY	1A2C
-		.remove_int	1A32
-		.add_int	1A52
-		.wait_vbl_done	1A6E
-		_wait_vbl_done	1A6E
-		_display_off	1A85
-		.display_off	1A85
-		.serial_IO	1AA6
-		_mode	1AD5
-		_get_mode	1ADE
-		_enable_interrupts	1AE3
-		_disable_interrupts	1AE5
-		_reset	1AE7
-		.reset	1AE7
-		_set_interrupts	1AED
-		_remove_VBL	1AF8
-		_remove_LCD	1B03
-		_remove_TIM	1B0E
-		_remove_SIO	1B19
-		_remove_JOY	1B24
-		_add_VBL	1B2F
-		_add_LCD	1B3A
-		_add_TIM	1B45
-		_add_SIO	1B50
-		_add_JOY	1B5B
-		_clock	1B66
-		__printTStates	1B6F
-		banked_call	1B70
-		banked_ret	1B89
+		.set_mode	1A96
+		.remove_VBL	1AA6
+		.remove_LCD	1AAC
+		.remove_TIM	1AB2
+		.remove_SIO	1AB8
+		.remove_JOY	1ABE
+		.add_VBL	1AC4
+		.add_LCD	1ACA
+		.add_TIM	1AD0
+		.add_SIO	1AD6
+		.add_JOY	1ADC
+		.remove_int	1AE2
+		.add_int	1B02
+		.wait_vbl_done	1B1E
+		_wait_vbl_done	1B1E
+		_display_off	1B35
+		.display_off	1B35
+		.serial_IO	1B56
+		_mode	1B85
+		_get_mode	1B8E
+		_enable_interrupts	1B93
+		_disable_interrupts	1B95
+		_reset	1B97
+		.reset	1B97
+		_set_interrupts	1B9D
+		_remove_VBL	1BA8
+		_remove_LCD	1BB3
+		_remove_TIM	1BBE
+		_remove_SIO	1BC9
+		_remove_JOY	1BD4
+		_add_VBL	1BDF
+		_add_LCD	1BEA
+		_add_TIM	1BF5
+		_add_SIO	1C00
+		_add_JOY	1C0B
+		_clock	1C16
+		__printTStates	1C1F
+		banked_call	1C20
+		banked_ret	1C39
 AREA _BASE
 	RADIX HEX
-	BASE 1B92
-	SIZE 02F2
+	BASE 1C42
+	SIZE 02DC
 	ATTRIB REL CON
 	GLOBALS
-		.set_sprite_prop	1B92
-		_set_sprite_prop	1B9F
-		_scroll_bkg	1BAA
-		.padup	1BC0
-		_waitpadup	1BC0
-		.jpad	1BD0
-		.wait_pad	1BFD
-		_joypad	1C04
-		_waitpad	1C09
-		.mv_sprite	1C13
-		_move_sprite	1C22
-		_set_win_data	1C2F
-		_set_bkg_data	1C2F
-		_set_sprite_data	1C7C
-		.scroll_sprite	1CAB
-		_scroll_sprite	1CBC
-		.set_sprite_tile	1CC9
-		_set_sprite_tile	1CD6
-		.get_sprite_prop	1CE1
-		_get_sprite_prop	1CEE
-		.copy_vram	1CF7
-		_get_data	1D06
-		_set_data	1D06
-		_set_bkg_tiles	1D19
-		__modslong	1D2D
-		__divslong	1D2D
-		__mulslong	1D2D
-		__divschar	1D2E
-		__modschar	1D3A
-		__divsint	1D45
-		__modsint	1D56
-		__divuchar	1D65
-		__moduchar	1D71
-		__divuint	1D7C
-		__moduint	1D8D
-		.mod8	1D9C
-		.div8	1D9C
-		.mod16	1DA4
-		.div16	1DA4
-		.modu8	1DDA
-		.divu8	1DDA
-		.modu16	1DDD
-		.divu16	1DDD
-		.set_xy_wtt	1E1A
-		.set_xy_btt	1E2B
-		.set_xy_tt	1E3A
-		_set_tiles	1E6B
+		.set_sprite_prop	1C42
+		_set_sprite_prop	1C4F
+		.padup	1C5A
+		_waitpadup	1C5A
+		.jpad	1C6A
+		.wait_pad	1C97
+		_joypad	1C9E
+		_waitpad	1CA3
+		.mv_sprite	1CAD
+		_move_sprite	1CBC
+		_set_win_data	1CC9
+		_set_bkg_data	1CC9
+		_set_sprite_data	1D16
+		.scroll_sprite	1D45
+		_scroll_sprite	1D56
+		.set_sprite_tile	1D63
+		_set_sprite_tile	1D70
+		.get_sprite_prop	1D7B
+		_get_sprite_prop	1D88
+		.copy_vram	1D91
+		_get_data	1DA0
+		_set_data	1DA0
+		_set_bkg_tiles	1DB3
+		__modslong	1DC7
+		__divslong	1DC7
+		__mulslong	1DC7
+		__divschar	1DC8
+		__modschar	1DD4
+		__divsint	1DDF
+		__modsint	1DF0
+		__divuchar	1DFF
+		__moduchar	1E0B
+		__divuint	1E16
+		__moduint	1E27
+		.mod8	1E36
+		.div8	1E36
+		.mod16	1E3E
+		.div16	1E3E
+		.modu8	1E74
+		.divu8	1E74
+		.modu16	1E77
+		.divu16	1E77
+		.set_xy_wtt	1EB4
+		.set_xy_btt	1EC5
+		.set_xy_tt	1ED4
+		_set_tiles	1F05
 AREA _LIT
 	RADIX HEX
-	BASE 1E84
+	BASE 1F1E
 	SIZE 0000
 	ATTRIB REL CON
 AREA _GSINIT
 	RADIX HEX
-	BASE 1E84
-	SIZE 0387
+	BASE 1F1E
+	SIZE 02CB
 	ATTRIB REL CON
 	GLOBALS
-		gsinit	1E84
+		gsinit	1F1E
 AREA _GSINITTAIL
 	RADIX HEX
-	BASE 220B
+	BASE 21E9
 	SIZE 0001
 	ATTRIB REL CON
 AREA _GSFINAL
 	RADIX HEX
-	BASE 220C
+	BASE 21EA
 	SIZE 0000
 	ATTRIB REL CON
 AREA _DATA
 	RADIX HEX
 	BASE C0A0
-	SIZE 00D9
+	SIZE 00B1
 	ATTRIB REL CON
 	GLOBALS
 		_state	C0A0
-		_BgTiles	C0A1
-		_player_tile	C131
-		_frame_counter	C132
-		_player_x	C134
-		_player_y	C136
-		_player_direction	C138
-		gbt_playing	C139
-		gbt_song	C13A
-		gbt_bank	C13C
-		gbt_speed	C13D
-		gbt_temp_play_data	C13E
-		gbt_loop_enabled	C14A
-		gbt_ticks_elapsed	C14B
-		gbt_current_step	C14C
-		gbt_current_pattern	C14D
-		gbt_current_step_data_ptr	C14E
-		gbt_channels_enabled	C150
-		gbt_pan	C151
-		gbt_vol	C155
-		gbt_instr	C159
-		gbt_freq	C15D
-		gbt_channel3_loaded_instrument	C163
-		gbt_arpeggio_freq_index	C164
-		gbt_arpeggio_enabled	C16D
-		gbt_arpeggio_tick	C170
-		gbt_cut_note_tick	C173
-		gbt_have_to_stop_next_step	C177
-		gbt_update_pattern_pointers	C178
+		_player_tile	C0A1
+		_frame_counter	C0A2
+		_player_x	C0A4
+		_player_y	C0A6
+		_player_direction	C0A8
+		_positions	C0A9
+		gbt_playing	C111
+		gbt_song	C112
+		gbt_bank	C114
+		gbt_speed	C115
+		gbt_temp_play_data	C116
+		gbt_loop_enabled	C122
+		gbt_ticks_elapsed	C123
+		gbt_current_step	C124
+		gbt_current_pattern	C125
+		gbt_current_step_data_ptr	C126
+		gbt_channels_enabled	C128
+		gbt_pan	C129
+		gbt_vol	C12D
+		gbt_instr	C131
+		gbt_freq	C135
+		gbt_channel3_loaded_instrument	C13B
+		gbt_arpeggio_freq_index	C13C
+		gbt_arpeggio_enabled	C145
+		gbt_arpeggio_tick	C148
+		gbt_cut_note_tick	C14B
+		gbt_have_to_stop_next_step	C14F
+		gbt_update_pattern_pointers	C150
 AREA _BSS
 	RADIX HEX
-	BASE C179
+	BASE C151
 	SIZE 005C
 	ATTRIB REL CON
 	GLOBALS
-		__cpu	C179
-		.mode	C17A
-		__io_out	C17B
-		__io_in	C17C
-		__io_status	C17D
-		.vbl_done	C17E
-		__current_bank	C17F
-		_sys_time	C180
-		.sys_time	C180
-		.int_0x40	C182
-		.int_0x48	C192
-		.int_0x50	C1A2
-		.int_0x58	C1B2
-		.int_0x60	C1C2
+		__cpu	C151
+		.mode	C152
+		__io_out	C153
+		__io_in	C154
+		__io_status	C155
+		.vbl_done	C156
+		__current_bank	C157
+		_sys_time	C158
+		.sys_time	C158
+		.int_0x40	C15A
+		.int_0x48	C16A
+		.int_0x50	C17A
+		.int_0x58	C18A
+		.int_0x60	C19A
 AREA _HEAP
 	RADIX HEX
-	BASE C1D5
+	BASE C1AD
 	SIZE 0000
 	ATTRIB REL CON
 	GLOBALS
-		_malloc_heap_start	C1D5
+		_malloc_heap_start	C1AD
 AREA _OVERLAY
 	RADIX HEX
-	BASE C1D5
+	BASE C1AD
 	SIZE 0000
 	ATTRIB REL CON
 AREA _ISEG
 	RADIX HEX
-	BASE C1D5
+	BASE C1AD
 	SIZE 0000
 	ATTRIB REL CON
 AREA _BSEG
 	RADIX HEX
-	BASE C1D5
+	BASE C1AD
 	SIZE 0000
 	ATTRIB REL CON
 AREA _XSEG
 	RADIX HEX
-	BASE C1D5
+	BASE C1AD
 	SIZE 0000
 	ATTRIB REL CON
 AREA _CODE_1
@@ -359,7 +358,7 @@ MODULES
 	FILE c:\gbdk\lib/small/asxxxx/gb/crt0.o
 		NAME Runtime
 	FILE build/main.o
-		NAME lcc64720
+		NAME lcc104760
 	FILE build/gbt_player.o
 	FILE build/gbt_player_bank1.o
 LIBRARIES
@@ -367,8 +366,6 @@ LIBRARIES
 		MODULE sfr.o
 	LIBRARY c:\gbdk\lib/small/asxxxx/gb/gb.lib
 		MODULE set_prop.o
-	LIBRARY c:\gbdk\lib/small/asxxxx/gb/gb.lib
-		MODULE scroll_b.o
 	LIBRARY c:\gbdk\lib/small/asxxxx/gb/gb.lib
 		MODULE pad.o
 	LIBRARY c:\gbdk\lib/small/asxxxx/gb/gb.lib

@@ -12,8 +12,24 @@
 UINT8 player_tile = 0;
 unsigned int frame_counter = 0;
 int player_x = 80;
-int player_y = 139;
+int player_y = 141;
 UINT8 player_direction = 0; // 0 left 1 right 2 up 3 down
+
+const unsigned int *positions[13][4] = { 
+    { 1, 0, 0, 0 }, // 0
+    { 1, 1, 1, 0 }, // 1
+    { 1, 0, 0, 0 }, // 2
+    { 0, 0, 1, 0 }, // 3
+    { 1, 0, 1, 1 }, // 4
+    { 1, 1, 0, 0 }, // 5
+    { 0, 0, 0, 1 }, // 6
+    { 0, 1, 1, 0 }, // 7
+    { 1, 0, 0, 1 }, // 8
+    { 0, 0, 1, 1 }, // 9
+    { 1, 0, 1, 1 }, // 10
+    { 1, 0, 1, 0 }, // 11
+    { 1, 0, 0, 1 }, // 12
+};
 
 /* Show splash screen and await button press (A) */
 void splash(){
@@ -30,25 +46,10 @@ void process_player_position(){
 
 }
 
-void detect_scroll(){
-    if (player_x > 149 && player_direction == 1) {
-        scroll_bkg(1, 0);
-    } 
-    if (player_x < 13 && player_direction == 0) {
-        scroll_bkg(-1, 0);
-    }
-    if (player_y < 25 && player_direction == 2) {
-        scroll_bkg(0, -1);
-    }
-    if (player_y > 139 && player_direction == 3) {
-        scroll_bkg(0, 1);
-    }
-}
-
 void process_input() {
     switch(joypad()) {
 		case J_RIGHT: 
-            if (player_x < 150) {
+            if (player_x < 149) {
                 player_direction = 1;
                 scroll_sprite(0, 1, 0);
                 scroll_sprite(1, 1, 0);
@@ -76,7 +77,7 @@ void process_input() {
             break;
 
         case J_DOWN: 
-            if (player_y < 140) {
+            if (player_y < 141) {
                 player_direction = 3;
                 scroll_sprite(0, 0, 1);
                 scroll_sprite(1, 0, 1);
@@ -131,17 +132,17 @@ void animate_player() {
 }
 
 void init(){
-    set_bkg_data(0, 9, BgTiles); 
+    set_bkg_data(0, 14, BgTiles); 
     set_bkg_tiles(0, 0, 32, 32, Bg);
     SPRITES_8x16; // Activate 8*16 sprite mode, defaults to 8x8
     set_sprite_data(0, 20, Player);
-    set_sprite_data(20, 4, Hammer);
+    set_sprite_data(20, 8, Hammer);
     move_sprite(0, player_x, player_y);
     move_sprite(1, player_x + 8, player_y);
-    //set_sprite_tile(3, 20);
-    //set_sprite_tile(4, 22);
-    //move_sprite(3, player_x + 24, player_y-2);
-    //move_sprite(4, player_x + 24 + 8, player_y-2);
+    set_sprite_tile(3, 20);
+    set_sprite_tile(4, 22);
+    move_sprite(3, 146, 136);
+    move_sprite(4, 154, 136);
     SHOW_SPRITES;
     fadein();
 }
@@ -157,7 +158,6 @@ void main(){
     while(1) {
         while(state == 0) { // 0: Main Menu
             cicled_delay(1);
-            //detect_scroll();
             animate_player();
             process_input();
         }
