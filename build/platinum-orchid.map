@@ -17,62 +17,66 @@ AREA .  .ABS.
 		l__LIT	0000
 		s__SFR	0000
 		l__GSINITTAIL	0001
-		l__BSS	005C
-		l__DATA	00B1
+		l__BSS	005E
+		l__DATA	00F5
 		l__HOME	01AC
 		l__HEADER	01E1
 		s__CODE	0200
-		l__GSINIT	02CB
-		l__BASE	02DC
+		l__BASE	02E7
+		l__GSINIT	0433
+		l__CODE_2	05AD
 		l__CODE_1	0671
-		l__CODE	1896
-		s__HOME	1A96
-		s__BASE	1C42
-		s__LIT	1F1E
-		s__GSINIT	1F1E
-		s__GSINITTAIL	21E9
-		s__GSFINAL	21EA
+		l__CODE	0C96
+		s__HOME	0E96
+		s__BASE	1042
+		l__CODE_3	1118
+		s__LIT	1329
+		s__GSINIT	1329
+		s__GSINITTAIL	175C
+		s__GSFINAL	175D
 		s__CODE_1	4000
+		s__CODE_2	4000
+		s__CODE_3	4000
 		.OAM	C000
 		s__DATA	C0A0
-		s__BSS	C151
-		s__HEAP	C1AD
-		s__BSEG	C1AD
-		s__ISEG	C1AD
-		s__XSEG	C1AD
-		s__OVERLAY	C1AD
+		s__BSS	C195
+		s__HEAP	C1F3
+		s__BSEG	C1F3
+		s__ISEG	C1F3
+		s__XSEG	C1F3
+		s__OVERLAY	C1F3
 		.STACK	E000
 		.refresh_OAM	FF80
 		l__SFR	10000
 AREA _CODE
 	RADIX HEX
 	BASE 0200
-	SIZE 1896
+	SIZE 0C96
 	ATTRIB REL CON
 	GLOBALS
 		_cicled_delay	0200
-		_play_sound	0214
-		_fadeout	0241
-		_fadein	02A4
-		_splash	0307
-		_splash_dat	034A
-		_splash_map	0B9A
-		_Bg	0D02
-		_BgTiles	1102
-		_Player	11E2
-		_Hammer	1322
-		_process_player_position	13C2
-		_process_input	13C3
-		_animate_player	15CB
-		_init	1791
-		_main	1868
-		gbt_get_pattern_ptr	1894
-		_gbt_play	18B1
-		_gbt_pause	196C
-		_gbt_loop	1978
-		_gbt_stop	197F
-		_gbt_enable_channels	198A
-		_gbt_update	1991
+		_generate_random_number	0214
+		_play_sound	022E
+		_fadeout	025B
+		_fadein	02BE
+		_splash	0321
+		_requires_offset	036A
+		_scroll_player_sprite	055C
+		_process_player_position	071F
+		_process_input	07EE
+		_animate_player	08AA
+		_init_music	0AC8
+		_init	0AF2
+		_main	0C2F
+		gbt_get_pattern_ptr	0C69
+		_gbt_play	0C86
+		_gbt_pause	0D41
+		_gbt_loop	0D4D
+		_gbt_stop	0D54
+		_gbt_enable_channels	0D5F
+		_gbt_update	0D66
+		_rand	0E6B
+		_randw	0E6B
 AREA _HEADER
 	RADIX HEX
 	BASE 0000
@@ -82,205 +86,234 @@ AREA _HEADER
 		_exit	01D2
 AREA _HOME
 	RADIX HEX
-	BASE 1A96
+	BASE 0E96
 	SIZE 01AC
 	ATTRIB REL CON
 	GLOBALS
-		.set_mode	1A96
-		.remove_VBL	1AA6
-		.remove_LCD	1AAC
-		.remove_TIM	1AB2
-		.remove_SIO	1AB8
-		.remove_JOY	1ABE
-		.add_VBL	1AC4
-		.add_LCD	1ACA
-		.add_TIM	1AD0
-		.add_SIO	1AD6
-		.add_JOY	1ADC
-		.remove_int	1AE2
-		.add_int	1B02
-		.wait_vbl_done	1B1E
-		_wait_vbl_done	1B1E
-		_display_off	1B35
-		.display_off	1B35
-		.serial_IO	1B56
-		_mode	1B85
-		_get_mode	1B8E
-		_enable_interrupts	1B93
-		_disable_interrupts	1B95
-		_reset	1B97
-		.reset	1B97
-		_set_interrupts	1B9D
-		_remove_VBL	1BA8
-		_remove_LCD	1BB3
-		_remove_TIM	1BBE
-		_remove_SIO	1BC9
-		_remove_JOY	1BD4
-		_add_VBL	1BDF
-		_add_LCD	1BEA
-		_add_TIM	1BF5
-		_add_SIO	1C00
-		_add_JOY	1C0B
-		_clock	1C16
-		__printTStates	1C1F
-		banked_call	1C20
-		banked_ret	1C39
+		.set_mode	0E96
+		.remove_VBL	0EA6
+		.remove_LCD	0EAC
+		.remove_TIM	0EB2
+		.remove_SIO	0EB8
+		.remove_JOY	0EBE
+		.add_VBL	0EC4
+		.add_LCD	0ECA
+		.add_TIM	0ED0
+		.add_SIO	0ED6
+		.add_JOY	0EDC
+		.remove_int	0EE2
+		.add_int	0F02
+		.wait_vbl_done	0F1E
+		_wait_vbl_done	0F1E
+		_display_off	0F35
+		.display_off	0F35
+		.serial_IO	0F56
+		_mode	0F85
+		_get_mode	0F8E
+		_enable_interrupts	0F93
+		_disable_interrupts	0F95
+		_reset	0F97
+		.reset	0F97
+		_set_interrupts	0F9D
+		_remove_VBL	0FA8
+		_remove_LCD	0FB3
+		_remove_TIM	0FBE
+		_remove_SIO	0FC9
+		_remove_JOY	0FD4
+		_add_VBL	0FDF
+		_add_LCD	0FEA
+		_add_TIM	0FF5
+		_add_SIO	1000
+		_add_JOY	100B
+		_clock	1016
+		__printTStates	101F
+		banked_call	1020
+		banked_ret	1039
 AREA _BASE
 	RADIX HEX
-	BASE 1C42
-	SIZE 02DC
+	BASE 1042
+	SIZE 02E7
 	ATTRIB REL CON
 	GLOBALS
-		.set_sprite_prop	1C42
-		_set_sprite_prop	1C4F
-		.padup	1C5A
-		_waitpadup	1C5A
-		.jpad	1C6A
-		.wait_pad	1C97
-		_joypad	1C9E
-		_waitpad	1CA3
-		.mv_sprite	1CAD
-		_move_sprite	1CBC
-		_set_win_data	1CC9
-		_set_bkg_data	1CC9
-		_set_sprite_data	1D16
-		.scroll_sprite	1D45
-		_scroll_sprite	1D56
-		.set_sprite_tile	1D63
-		_set_sprite_tile	1D70
-		.get_sprite_prop	1D7B
-		_get_sprite_prop	1D88
-		.copy_vram	1D91
-		_get_data	1DA0
-		_set_data	1DA0
-		_set_bkg_tiles	1DB3
-		__modslong	1DC7
-		__divslong	1DC7
-		__mulslong	1DC7
-		__divschar	1DC8
-		__modschar	1DD4
-		__divsint	1DDF
-		__modsint	1DF0
-		__divuchar	1DFF
-		__moduchar	1E0B
-		__divuint	1E16
-		__moduint	1E27
-		.mod8	1E36
-		.div8	1E36
-		.mod16	1E3E
-		.div16	1E3E
-		.modu8	1E74
-		.divu8	1E74
-		.modu16	1E77
-		.divu16	1E77
-		.set_xy_wtt	1EB4
-		.set_xy_btt	1EC5
-		.set_xy_tt	1ED4
-		_set_tiles	1F05
+		.set_sprite_prop	1042
+		_set_sprite_prop	104F
+		_initrand	105A
+		.initrand	105C
+		.padup	1065
+		_waitpadup	1065
+		.jpad	1075
+		.wait_pad	10A2
+		_joypad	10A9
+		_waitpad	10AE
+		.mv_sprite	10B8
+		_move_sprite	10C7
+		__modslong	10D4
+		__divslong	10D4
+		__mulslong	10D4
+		__divschar	10D5
+		__modschar	10E1
+		__divsint	10EC
+		__modsint	10FD
+		__divuchar	110C
+		__moduchar	1118
+		__divuint	1123
+		__moduint	1134
+		.mod8	1143
+		.div8	1143
+		.mod16	114B
+		.div16	114B
+		.modu8	1181
+		.divu8	1181
+		.modu16	1184
+		.divu16	1184
+		_set_win_data	11C1
+		_set_bkg_data	11C1
+		_set_sprite_data	120E
+		.scroll_sprite	123D
+		_scroll_sprite	124E
+		.set_sprite_tile	125B
+		_set_sprite_tile	1268
+		.get_sprite_prop	1273
+		_get_sprite_prop	1280
+		.copy_vram	1289
+		_get_data	1298
+		_set_data	1298
+		_set_bkg_tiles	12AB
+		.set_xy_wtt	12BF
+		.set_xy_btt	12D0
+		.set_xy_tt	12DF
+		_set_tiles	1310
 AREA _LIT
 	RADIX HEX
-	BASE 1F1E
+	BASE 1329
 	SIZE 0000
 	ATTRIB REL CON
 AREA _GSINIT
 	RADIX HEX
-	BASE 1F1E
-	SIZE 02CB
+	BASE 1329
+	SIZE 0433
 	ATTRIB REL CON
 	GLOBALS
-		gsinit	1F1E
+		gsinit	1329
 AREA _GSINITTAIL
 	RADIX HEX
-	BASE 21E9
+	BASE 175C
 	SIZE 0001
 	ATTRIB REL CON
 AREA _GSFINAL
 	RADIX HEX
-	BASE 21EA
+	BASE 175D
 	SIZE 0000
 	ATTRIB REL CON
 AREA _DATA
 	RADIX HEX
 	BASE C0A0
-	SIZE 00B1
+	SIZE 00F5
 	ATTRIB REL CON
 	GLOBALS
 		_state	C0A0
-		_player_tile	C0A1
-		_frame_counter	C0A2
-		_player_x	C0A4
-		_player_y	C0A6
-		_player_direction	C0A8
-		_positions	C0A9
-		gbt_playing	C111
-		gbt_song	C112
-		gbt_bank	C114
-		gbt_speed	C115
-		gbt_temp_play_data	C116
-		gbt_loop_enabled	C122
-		gbt_ticks_elapsed	C123
-		gbt_current_step	C124
-		gbt_current_pattern	C125
-		gbt_current_step_data_ptr	C126
-		gbt_channels_enabled	C128
-		gbt_pan	C129
-		gbt_vol	C12D
-		gbt_instr	C131
-		gbt_freq	C135
-		gbt_channel3_loaded_instrument	C13B
-		gbt_arpeggio_freq_index	C13C
-		gbt_arpeggio_enabled	C145
-		gbt_arpeggio_tick	C148
-		gbt_cut_note_tick	C14B
-		gbt_have_to_stop_next_step	C14F
-		gbt_update_pattern_pointers	C150
+		_offset_x	C0A1
+		_can_process	C0A2
+		_hammer_tile	C0A3
+		_player_tile	C0A4
+		_player_position	C0A5
+		_requires_scrolling_x	C0A6
+		_requires_scrolling_y	C0A7
+		_has_reached	C0A8
+		_frame_counter	C0A9
+		_player_x_diff	C0AB
+		_player_y_diff	C0AD
+		_player_direction	C0AF
+		_timer	C0B1
+		_movements	C0B3
+		_positions	C113
+		_player_x	C143
+		_player_y	C145
+		_player_new_x	C147
+		_player_new_y	C149
+		_song_Data	C14B
+		gbt_playing	C155
+		gbt_song	C156
+		gbt_bank	C158
+		gbt_speed	C159
+		gbt_temp_play_data	C15A
+		gbt_loop_enabled	C166
+		gbt_ticks_elapsed	C167
+		gbt_current_step	C168
+		gbt_current_pattern	C169
+		gbt_current_step_data_ptr	C16A
+		gbt_channels_enabled	C16C
+		gbt_pan	C16D
+		gbt_vol	C171
+		gbt_instr	C175
+		gbt_freq	C179
+		gbt_channel3_loaded_instrument	C17F
+		gbt_arpeggio_freq_index	C180
+		gbt_arpeggio_enabled	C189
+		gbt_arpeggio_tick	C18C
+		gbt_cut_note_tick	C18F
+		gbt_have_to_stop_next_step	C193
+		gbt_update_pattern_pointers	C194
 AREA _BSS
 	RADIX HEX
-	BASE C151
-	SIZE 005C
+	BASE C195
+	SIZE 005E
 	ATTRIB REL CON
 	GLOBALS
-		__cpu	C151
-		.mode	C152
-		__io_out	C153
-		__io_in	C154
-		__io_status	C155
-		.vbl_done	C156
-		__current_bank	C157
-		_sys_time	C158
-		.sys_time	C158
-		.int_0x40	C15A
-		.int_0x48	C16A
-		.int_0x50	C17A
-		.int_0x58	C18A
-		.int_0x60	C19A
+		__cpu	C195
+		.mode	C196
+		__io_out	C197
+		__io_in	C198
+		__io_status	C199
+		.vbl_done	C19A
+		__current_bank	C19B
+		_sys_time	C19C
+		.sys_time	C19C
+		.int_0x40	C19E
+		.int_0x48	C1AE
+		.int_0x50	C1BE
+		.int_0x58	C1CE
+		.int_0x60	C1DE
+		.randhi	C1EE
+		.randlo	C1EF
 AREA _HEAP
 	RADIX HEX
-	BASE C1AD
+	BASE C1F3
 	SIZE 0000
 	ATTRIB REL CON
 	GLOBALS
-		_malloc_heap_start	C1AD
+		_malloc_heap_start	C1F3
 AREA _OVERLAY
 	RADIX HEX
-	BASE C1AD
+	BASE C1F3
 	SIZE 0000
 	ATTRIB REL CON
 AREA _ISEG
 	RADIX HEX
-	BASE C1AD
+	BASE C1F3
 	SIZE 0000
 	ATTRIB REL CON
 AREA _BSEG
 	RADIX HEX
-	BASE C1AD
+	BASE C1F3
 	SIZE 0000
 	ATTRIB REL CON
 AREA _XSEG
 	RADIX HEX
-	BASE C1AD
+	BASE C1F3
 	SIZE 0000
 	ATTRIB REL CON
+AREA _CODE_2
+	RADIX HEX
+	BASE 4000
+	SIZE 05AD
+	ATTRIB REL CON
+	GLOBALS
+		_song0	4000
+		_song1	4124
+		_song2	4245
+		_song3	4345
+		_song4	4485
 AREA _CODE_1
 	RADIX HEX
 	BASE 4000
@@ -293,6 +326,18 @@ AREA _CODE_1
 		gbt_channel_4_handle	4548
 		gbt_update_bank1	4638
 		gbt_update_effects_bank1	4654
+AREA _CODE_3
+	RADIX HEX
+	BASE 4000
+	SIZE 1118
+	ATTRIB REL CON
+	GLOBALS
+		_SplashTiles	4000
+		_SplashMap	4850
+		_BgTiles	49B8
+		_Bg	4AD8
+		_Player	4ED8
+		_Hammer	5018
 AREA _SFR
 	RADIX HEX
 	BASE 0000
@@ -358,18 +403,26 @@ MODULES
 	FILE c:\gbdk\lib/small/asxxxx/gb/crt0.o
 		NAME Runtime
 	FILE build/main.o
-		NAME lcc104760
+		NAME lcc181720
+	FILE build/badguy.o
+		NAME lcc32400
 	FILE build/gbt_player.o
 	FILE build/gbt_player_bank1.o
+	FILE build/bank3.o
+		NAME lcc64560
 LIBRARIES
 	LIBRARY c:\gbdk\lib/small/asxxxx/gb/gb.lib
 		MODULE sfr.o
 	LIBRARY c:\gbdk\lib/small/asxxxx/gb/gb.lib
 		MODULE set_prop.o
 	LIBRARY c:\gbdk\lib/small/asxxxx/gb/gb.lib
+		MODULE rand.o
+	LIBRARY c:\gbdk\lib/small/asxxxx/gb/gb.lib
 		MODULE pad.o
 	LIBRARY c:\gbdk\lib/small/asxxxx/gb/gb.lib
 		MODULE mv_spr.o
+	LIBRARY c:\gbdk\lib/small/asxxxx/gbz80/gbz80.lib
+		MODULE div.o
 	LIBRARY c:\gbdk\lib/small/asxxxx/gb/gb.lib
 		MODULE set_data.o
 	LIBRARY c:\gbdk\lib/small/asxxxx/gb/gb.lib
@@ -382,8 +435,6 @@ LIBRARIES
 		MODULE cpy_data.o
 	LIBRARY c:\gbdk\lib/small/asxxxx/gb/gb.lib
 		MODULE set_bk_t.o
-	LIBRARY c:\gbdk\lib/small/asxxxx/gbz80/gbz80.lib
-		MODULE div.o
 	LIBRARY c:\gbdk\lib/small/asxxxx/gb/gb.lib
 		MODULE set_xy_t.o
 USERBASEDEF

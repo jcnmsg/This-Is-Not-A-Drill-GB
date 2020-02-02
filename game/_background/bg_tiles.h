@@ -1,6 +1,6 @@
 /*
 
- BBIT.H
+ BG_TILES.H
 
  Include File.
 
@@ -9,8 +9,8 @@
   Format               : Gameboy 4 color.
   Compression          : None.
   Counter              : None.
-  Tile size            : 8 x 16
-  Tiles                : 0 to 9
+  Tile size            : 8 x 8
+  Tiles                : 0 to 3
 
   Palette colors       : None.
   SGB Palette          : None.
@@ -24,8 +24,8 @@
 
 
 /* Bank of tiles. */
-#define PlayerBank 0
+#define TileLabelBank 3
 /* Start of tile array. */
-extern const unsigned char Bbit[];
+extern const unsigned char BgTiles[];
 
-/* End of BBIT.H */
+/* End of BG_TILES.H */

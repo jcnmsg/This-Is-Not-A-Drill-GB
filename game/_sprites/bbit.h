@@ -1,6 +1,6 @@
 /*
 
- HAMMER.H
+ BBIT.H
 
  Include File.
 
@@ -10,7 +10,7 @@
   Compression          : None.
   Counter              : None.
   Tile size            : 8 x 16
-  Tiles                : 0 to 4
+  Tiles                : 0 to 9
 
   Palette colors       : None.
   SGB Palette          : None.
@@ -24,8 +24,8 @@
 
 
 /* Bank of tiles. */
-#define HammerBank 0
+#define PlayerBank 3
 /* Start of tile array. */
-extern unsigned char Hammer[];
+extern const unsigned char Bbit[];
 
-/* End of HAMMER.H */
+/* End of BBIT.H */

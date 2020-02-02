@@ -1,6 +1,6 @@
 /*
 
- BG_TILES.H
+ HAMMER.H
 
  Include File.
 
@@ -9,8 +9,8 @@
   Format               : Gameboy 4 color.
   Compression          : None.
   Counter              : None.
-  Tile size            : 8 x 8
-  Tiles                : 0 to 3
+  Tile size            : 8 x 16
+  Tiles                : 0 to 4
 
   Palette colors       : None.
   SGB Palette          : None.
@@ -24,8 +24,8 @@
 
 
 /* Bank of tiles. */
-#define TileLabelBank 0
+#define HammerBank 3
 /* Start of tile array. */
-extern const unsigned char BgTiles[];
+extern unsigned char Hammer[];
 
-/* End of BG_TILES.H */
+/* End of HAMMER.H */

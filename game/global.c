@@ -1,10 +1,8 @@
 /* GBDK library */
 #include <gb/gb.h>
-#include <gb/console.h>
 #include <stdio.h> 
 #include <stdlib.h> 
 #include <rand.h>
-#include <time.h>
 #include "vendor/gbt_player.h"
 
 /* Global variables */
@@ -18,8 +16,11 @@ void cicled_delay(UINT8 cicles){
     }
 }
 
-/* Sound data */
-//extern const unsigned char * song_Data[];
+UINT8 generate_random_number(UINT8 upper) {
+    UINT8 num;
+    num = (rand() % (upper + 1) );
+    return num;
+}
 
 /* Sound functions */
 void play_sound(UINT8 fx) {

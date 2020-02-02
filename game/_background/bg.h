@@ -20,7 +20,7 @@
 
 #define BgWidth 32
 #define BgHeight 32
-#define BgBank 0
+#define BgBank 3
 
 extern const unsigned char Background[];
 
