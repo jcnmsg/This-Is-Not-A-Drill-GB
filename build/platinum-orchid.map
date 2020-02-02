@@ -17,58 +17,80 @@ AREA .  .ABS.
 		l__LIT	0000
 		s__SFR	0000
 		l__GSINITTAIL	0001
-		l__BSS	005E
-		l__DATA	00AC
+		l__BSS	0097
+		l__DATA	0132
 		l__HOME	01AC
 		l__HEADER	01E1
 		s__CODE	0200
+		l__CODE_2	0245
 		l__BASE	02E7
-		l__GSINIT	0406
-		l__CODE	0BA6
-		s__HOME	0DA6
-		s__BASE	0F52
-		l__CODE_3	1118
-		s__LIT	1239
-		s__GSINIT	1239
-		s__GSINITTAIL	163F
-		s__GSFINAL	1640
+		l__GSINIT	0575
+		l__CODE_1	0671
+		l__CODE	1777
+		l__CODE_3	18B8
+		s__HOME	1977
+		s__BASE	1B23
+		s__LIT	1E0A
+		s__GSINIT	1E0A
+		s__GSINITTAIL	237F
+		s__GSFINAL	2380
+		s__CODE_1	4000
+		s__CODE_2	4000
 		s__CODE_3	4000
 		.OAM	C000
 		s__DATA	C0A0
-		s__BSS	C14C
-		s__HEAP	C1AA
-		s__BSEG	C1AA
-		s__ISEG	C1AA
-		s__XSEG	C1AA
-		s__OVERLAY	C1AA
+		s__BSS	C1D2
+		s__HEAP	C269
+		s__BSEG	C269
+		s__ISEG	C269
+		s__XSEG	C269
+		s__OVERLAY	C269
 		.STACK	E000
 		.refresh_OAM	FF80
 		l__SFR	10000
 AREA _CODE
 	RADIX HEX
 	BASE 0200
-	SIZE 0BA6
+	SIZE 1777
 	ATTRIB REL CON
 	GLOBALS
 		_cicled_delay	0200
 		_generate_random_number	0214
-		_play_sound	022E
-		_fadeout	025B
-		_fadein	02BE
-		_pickup_hammer	0321
-		_check_hammer_status	0352
-		_open_ledge	0371
-		_close_ledge	03E7
-		_requires_offset	0401
-		_scroll_player_sprite	05F3
-		_process_player_position	07CF
-		_process_input	089E
-		_animate_player	095A
-		_init_game	0BA2
-		_splash	0CDC
-		_main	0D25
-		_rand	0D7B
-		_randw	0D7B
+		_init_randomizer	0225
+		_play_sound	024C
+		_fadeout	02CF
+		_fadein	0332
+		_thunder	0395
+		_process_hazards	04D7
+		_show_hazard	0556
+		_reset_hammer	0623
+		_reset_hazard	06D0
+		_pickup_hammer	072D
+		_check_hammer_status	0799
+		_open_ledge	07B8
+		_close_ledge	0834
+		_requires_offset	0854
+		_scroll_player_sprite	0B1D
+		_process_player_position	0DA5
+		_process_input	0E74
+		_animate_player	0F97
+		_init_game	11B5
+		_splash	131D
+		_animate_menu	1366
+		_init_menu	1487
+		_scroll_menu_sprites	157F
+		_main	15D5
+		gbt_get_pattern_ptr	16F1
+		_gbt_play	170E
+		_gbt_pause	17C9
+		_gbt_loop	17D5
+		_gbt_stop	17DC
+		_gbt_enable_channels	17E7
+		_gbt_update	17EE
+		_rand	18F3
+		_randw	18F3
+		_arand	191E
+		_initarand	194A
 AREA _HEADER
 	RADIX HEX
 	BASE 0000
@@ -78,213 +100,268 @@ AREA _HEADER
 		_exit	01D2
 AREA _HOME
 	RADIX HEX
-	BASE 0DA6
+	BASE 1977
 	SIZE 01AC
 	ATTRIB REL CON
 	GLOBALS
-		.set_mode	0DA6
-		.remove_VBL	0DB6
-		.remove_LCD	0DBC
-		.remove_TIM	0DC2
-		.remove_SIO	0DC8
-		.remove_JOY	0DCE
-		.add_VBL	0DD4
-		.add_LCD	0DDA
-		.add_TIM	0DE0
-		.add_SIO	0DE6
-		.add_JOY	0DEC
-		.remove_int	0DF2
-		.add_int	0E12
-		.wait_vbl_done	0E2E
-		_wait_vbl_done	0E2E
-		_display_off	0E45
-		.display_off	0E45
-		.serial_IO	0E66
-		_mode	0E95
-		_get_mode	0E9E
-		_enable_interrupts	0EA3
-		_disable_interrupts	0EA5
-		_reset	0EA7
-		.reset	0EA7
-		_set_interrupts	0EAD
-		_remove_VBL	0EB8
-		_remove_LCD	0EC3
-		_remove_TIM	0ECE
-		_remove_SIO	0ED9
-		_remove_JOY	0EE4
-		_add_VBL	0EEF
-		_add_LCD	0EFA
-		_add_TIM	0F05
-		_add_SIO	0F10
-		_add_JOY	0F1B
-		_clock	0F26
-		__printTStates	0F2F
-		banked_call	0F30
-		banked_ret	0F49
+		.set_mode	1977
+		.remove_VBL	1987
+		.remove_LCD	198D
+		.remove_TIM	1993
+		.remove_SIO	1999
+		.remove_JOY	199F
+		.add_VBL	19A5
+		.add_LCD	19AB
+		.add_TIM	19B1
+		.add_SIO	19B7
+		.add_JOY	19BD
+		.remove_int	19C3
+		.add_int	19E3
+		.wait_vbl_done	19FF
+		_wait_vbl_done	19FF
+		_display_off	1A16
+		.display_off	1A16
+		.serial_IO	1A37
+		_mode	1A66
+		_get_mode	1A6F
+		_enable_interrupts	1A74
+		_disable_interrupts	1A76
+		_reset	1A78
+		.reset	1A78
+		_set_interrupts	1A7E
+		_remove_VBL	1A89
+		_remove_LCD	1A94
+		_remove_TIM	1A9F
+		_remove_SIO	1AAA
+		_remove_JOY	1AB5
+		_add_VBL	1AC0
+		_add_LCD	1ACB
+		_add_TIM	1AD6
+		_add_SIO	1AE1
+		_add_JOY	1AEC
+		_clock	1AF7
+		__printTStates	1B00
+		banked_call	1B01
+		banked_ret	1B1A
 AREA _BASE
 	RADIX HEX
-	BASE 0F52
+	BASE 1B23
 	SIZE 02E7
 	ATTRIB REL CON
 	GLOBALS
-		.set_sprite_prop	0F52
-		_set_sprite_prop	0F5F
-		_initrand	0F6A
-		.initrand	0F6C
-		.padup	0F75
-		_waitpadup	0F75
-		.jpad	0F85
-		.wait_pad	0FB2
-		_joypad	0FB9
-		_waitpad	0FBE
-		.mv_sprite	0FC8
-		_move_sprite	0FD7
-		__modslong	0FE4
-		__divslong	0FE4
-		__mulslong	0FE4
-		__divschar	0FE5
-		__modschar	0FF1
-		__divsint	0FFC
-		__modsint	100D
-		__divuchar	101C
-		__moduchar	1028
-		__divuint	1033
-		__moduint	1044
-		.mod8	1053
-		.div8	1053
-		.mod16	105B
-		.div16	105B
-		.modu8	1091
-		.divu8	1091
-		.modu16	1094
-		.divu16	1094
-		_set_win_data	10D1
-		_set_bkg_data	10D1
-		_set_sprite_data	111E
-		.scroll_sprite	114D
-		_scroll_sprite	115E
-		.set_sprite_tile	116B
-		_set_sprite_tile	1178
-		.get_sprite_prop	1183
-		_get_sprite_prop	1190
-		.copy_vram	1199
-		_get_data	11A8
-		_set_data	11A8
-		_set_bkg_tiles	11BB
-		.set_xy_wtt	11CF
-		.set_xy_btt	11E0
-		.set_xy_tt	11EF
-		_set_tiles	1220
+		.set_sprite_prop	1B23
+		_set_sprite_prop	1B30
+		_initrand	1B3B
+		.initrand	1B3D
+		.padup	1B46
+		_waitpadup	1B46
+		.jpad	1B56
+		.wait_pad	1B83
+		_joypad	1B8A
+		_waitpad	1B8F
+		.mv_sprite	1B99
+		_move_sprite	1BA8
+		_set_win_data	1BB5
+		_set_bkg_data	1BB5
+		_set_sprite_data	1C02
+		.scroll_sprite	1C31
+		_scroll_sprite	1C42
+		.set_sprite_tile	1C4F
+		_set_sprite_tile	1C5C
+		.get_sprite_prop	1C67
+		_get_sprite_prop	1C74
+		.copy_vram	1C7D
+		_get_data	1C8C
+		_set_data	1C8C
+		_set_bkg_tiles	1C9F
+		__modslong	1CB3
+		__divslong	1CB3
+		__mulslong	1CB3
+		__divschar	1CB4
+		__modschar	1CC0
+		__divsint	1CCB
+		__modsint	1CDC
+		__divuchar	1CEB
+		__moduchar	1CF7
+		__divuint	1D02
+		__moduint	1D13
+		.mod8	1D22
+		.div8	1D22
+		.mod16	1D2A
+		.div16	1D2A
+		.modu8	1D60
+		.divu8	1D60
+		.modu16	1D63
+		.divu16	1D63
+		.set_xy_wtt	1DA0
+		.set_xy_btt	1DB1
+		.set_xy_tt	1DC0
+		_set_tiles	1DF1
 AREA _LIT
 	RADIX HEX
-	BASE 1239
+	BASE 1E0A
 	SIZE 0000
 	ATTRIB REL CON
 AREA _GSINIT
 	RADIX HEX
-	BASE 1239
-	SIZE 0406
+	BASE 1E0A
+	SIZE 0575
 	ATTRIB REL CON
 	GLOBALS
-		gsinit	1239
+		gsinit	1E0A
 AREA _GSINITTAIL
 	RADIX HEX
-	BASE 163F
+	BASE 237F
 	SIZE 0001
 	ATTRIB REL CON
 AREA _GSFINAL
 	RADIX HEX
-	BASE 1640
+	BASE 2380
 	SIZE 0000
 	ATTRIB REL CON
 AREA _DATA
 	RADIX HEX
 	BASE C0A0
-	SIZE 00AC
+	SIZE 0132
 	ATTRIB REL CON
 	GLOBALS
 		_state	C0A0
-		_movements	C0A1
-		_positions	C101
-		_offset_x	C131
-		_can_process	C132
-		_hammer_tile	C133
-		_player_tile	C134
-		_player_position	C135
-		_requires_scrolling_x	C136
-		_requires_scrolling_y	C137
-		_has_reached	C138
-		_has_hammer	C139
-		_frame_counter	C13A
-		_player_x_diff	C13C
-		_player_y_diff	C13E
-		_player_direction	C140
-		_timer	C142
-		_player_x	C144
-		_player_y	C146
-		_player_new_x	C148
-		_player_new_y	C14A
+		_thunder_counter	C0A1
+		_movements	C0A3
+		_positions	C103
+		_hazard_positions	C133
+		_offset_x	C163
+		_can_process	C164
+		_hammer_tile	C165
+		_player_tile	C166
+		_player_position	C167
+		_requires_scrolling_x	C168
+		_requires_scrolling_y	C169
+		_has_reached	C16A
+		_has_hammer	C16B
+		_frame_counter	C16C
+		_player_x_diff	C16E
+		_player_y_diff	C170
+		_player_direction	C172
+		_timer	C174
+		_player_x	C176
+		_player_y	C178
+		_player_new_x	C17A
+		_player_new_y	C17C
+		_throw_hazard	C17E
+		_thunder_active	C180
+		_hazard_trigger	C182
+		_hazard_room	C184
+		_can_generate_hazard	C186
+		_hazard_timer	C188
+		_score	C18A
+		_song_Data	C18C
+		gbt_playing	C192
+		gbt_song	C193
+		gbt_bank	C195
+		gbt_speed	C196
+		gbt_temp_play_data	C197
+		gbt_loop_enabled	C1A3
+		gbt_ticks_elapsed	C1A4
+		gbt_current_step	C1A5
+		gbt_current_pattern	C1A6
+		gbt_current_step_data_ptr	C1A7
+		gbt_channels_enabled	C1A9
+		gbt_pan	C1AA
+		gbt_vol	C1AE
+		gbt_instr	C1B2
+		gbt_freq	C1B6
+		gbt_channel3_loaded_instrument	C1BC
+		gbt_arpeggio_freq_index	C1BD
+		gbt_arpeggio_enabled	C1C6
+		gbt_arpeggio_tick	C1C9
+		gbt_cut_note_tick	C1CC
+		gbt_have_to_stop_next_step	C1D0
+		gbt_update_pattern_pointers	C1D1
 AREA _BSS
 	RADIX HEX
-	BASE C14C
-	SIZE 005E
+	BASE C1D2
+	SIZE 0097
 	ATTRIB REL CON
 	GLOBALS
-		__cpu	C14C
-		.mode	C14D
-		__io_out	C14E
-		__io_in	C14F
-		__io_status	C150
-		.vbl_done	C151
-		__current_bank	C152
-		_sys_time	C153
-		.sys_time	C153
-		.int_0x40	C155
-		.int_0x48	C165
-		.int_0x50	C175
-		.int_0x58	C185
-		.int_0x60	C195
-		.randhi	C1A5
-		.randlo	C1A6
+		__cpu	C1D2
+		.mode	C1D3
+		__io_out	C1D4
+		__io_in	C1D5
+		__io_status	C1D6
+		.vbl_done	C1D7
+		__current_bank	C1D8
+		_sys_time	C1D9
+		.sys_time	C1D9
+		.int_0x40	C1DB
+		.int_0x48	C1EB
+		.int_0x50	C1FB
+		.int_0x58	C20B
+		.int_0x60	C21B
+		.randhi	C22B
+		.randlo	C22C
 AREA _HEAP
 	RADIX HEX
-	BASE C1AA
+	BASE C269
 	SIZE 0000
 	ATTRIB REL CON
 	GLOBALS
-		_malloc_heap_start	C1AA
+		_malloc_heap_start	C269
 AREA _OVERLAY
 	RADIX HEX
-	BASE C1AA
+	BASE C269
 	SIZE 0000
 	ATTRIB REL CON
 AREA _ISEG
 	RADIX HEX
-	BASE C1AA
+	BASE C269
 	SIZE 0000
 	ATTRIB REL CON
 AREA _BSEG
 	RADIX HEX
-	BASE C1AA
+	BASE C269
 	SIZE 0000
 	ATTRIB REL CON
 AREA _XSEG
 	RADIX HEX
-	BASE C1AA
+	BASE C269
 	SIZE 0000
 	ATTRIB REL CON
+AREA _CODE_2
+	RADIX HEX
+	BASE 4000
+	SIZE 0245
+	ATTRIB REL CON
+	GLOBALS
+		_song0	4000
+		_song1	4124
 AREA _CODE_3
 	RADIX HEX
 	BASE 4000
-	SIZE 1118
+	SIZE 18B8
 	ATTRIB REL CON
 	GLOBALS
 		_SplashTiles	4000
 		_SplashMap	4850
 		_BgTiles	49B8
 		_Bg	4AD8
-		_Player	4ED8
-		_Hammer	5018
+		_Player	4C40
+		_Hammer	4D80
+		_Breaks	4E80
+		_MenuTiles	4F00
+		_MenuMap	5750
+AREA _CODE_1
+	RADIX HEX
+	BASE 4000
+	SIZE 0671
+	ATTRIB REL CON
+	GLOBALS
+		gbt_channel_1_handle	412C
+		gbt_channel_2_handle	4283
+		gbt_channel_3_handle	43D6
+		gbt_channel_4_handle	4548
+		gbt_update_bank1	4638
+		gbt_update_effects_bank1	4654
 AREA _SFR
 	RADIX HEX
 	BASE 0000
@@ -350,9 +427,13 @@ MODULES
 	FILE c:\gbdk\lib/small/asxxxx/gb/crt0.o
 		NAME Runtime
 	FILE build/main.o
-		NAME lcc21640
+		NAME lcc37600
+	FILE build/music.o
+		NAME lcc154960
 	FILE build/bank3.o
-		NAME lcc180080
+		NAME lcc109640
+	FILE build/gbt_player.o
+	FILE build/gbt_player_bank1.o
 LIBRARIES
 	LIBRARY c:\gbdk\lib/small/asxxxx/gb/gb.lib
 		MODULE sfr.o
@@ -364,8 +445,8 @@ LIBRARIES
 		MODULE pad.o
 	LIBRARY c:\gbdk\lib/small/asxxxx/gb/gb.lib
 		MODULE mv_spr.o
-	LIBRARY c:\gbdk\lib/small/asxxxx/gbz80/gbz80.lib
-		MODULE div.o
+	LIBRARY c:\gbdk\lib/small/asxxxx/gb/gb.lib
+		MODULE arand.o
 	LIBRARY c:\gbdk\lib/small/asxxxx/gb/gb.lib
 		MODULE set_data.o
 	LIBRARY c:\gbdk\lib/small/asxxxx/gb/gb.lib
@@ -378,6 +459,8 @@ LIBRARIES
 		MODULE cpy_data.o
 	LIBRARY c:\gbdk\lib/small/asxxxx/gb/gb.lib
 		MODULE set_bk_t.o
+	LIBRARY c:\gbdk\lib/small/asxxxx/gbz80/gbz80.lib
+		MODULE div.o
 	LIBRARY c:\gbdk\lib/small/asxxxx/gb/gb.lib
 		MODULE set_xy_t.o
 USERBASEDEF
@@ -386,6 +469,10 @@ USERBASEDEF
 	_CODE_1=0x4000
 	_CODE_2=0x4000
 	_CODE_3=0x4000
+	_CODE_4=0x4000
+	_CODE_5=0x4000
+	_CODE_6=0x4000
+	_CODE_7=0x4000
 USERGLOBALDEF
 	.OAM=0xC000
 	.STACK=0xE000

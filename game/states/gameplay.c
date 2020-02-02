@@ -5,7 +5,10 @@ extern const unsigned char *Bg[];
 extern const unsigned char *Player[];
 extern const unsigned char *SplashTiles[];
 extern const unsigned char *SplashMap[];
-
+extern const unsigned char *Breaks[];
+extern const unsigned char *MenuTiles[];
+extern const unsigned char *MenuMap[];
+extern const unsigned char *song_Data[];
 
 int *movements[12][4] = { 
     { 0, 0, 1, 0 }, // 0
@@ -37,6 +40,21 @@ int *positions[12][2] = {
     { 140, 33 }
 };
 
+int *hazard_positions[12][2] = {
+    {0, 0}, // 0
+    {90, 132}, // 1
+    {0, 0}, // 2
+    {17, 90}, // 3
+    {70, 90}, // 4
+    {123, 90}, // 5
+    {17, 55}, // 6
+    {70, 55}, // 7
+    {123, 55}, // 8
+    {17, 25}, // 9
+    {78, 25},  // 10
+    {139, 25} // 11
+};
+
 UINT8 offset_x = 0;
 UINT8 can_process = 0;
 UINT8 hammer_tile = 20;
@@ -55,10 +73,88 @@ int player_x = positions[0][0];
 int player_y = positions[0][1];
 int player_new_x = player_x;
 int player_new_y = player_y;
+int throw_hazard = 0;
+int thunder_active = 0;
+int hazard_trigger = 0;
+int hazard_room = -1;
+int can_generate_hazard = 1;
+int hazard_timer = 0;
+int score = 0;
+
+void process_hazards() {
+    if (thunder_active == 1)  {
+        thunder();
+
+        if (thunder_counter > 21) {
+            thunder_counter = 0;
+            thunder_active = 0;
+
+            if (can_generate_hazard == 1) {
+                hazard_room = generate_random_number(11);
+                if (hazard_room != 2) {
+                    can_generate_hazard = 0;
+                    play_sound(1);
+                }
+            }
+        }
+    }
+}
+
+void show_hazard() {
+    int hazard_x, hazard_y;
+    if (can_generate_hazard == 0) { // means it's already going
+        hazard_x = hazard_positions[hazard_room][0];
+        hazard_y = hazard_positions[hazard_room][1];
+
+        move_sprite(5, hazard_x, hazard_y);
+        move_sprite(6, hazard_x + 8, hazard_y);
+
+        hazard_timer+=1;
+        if (hazard_timer > 200) {
+            set_sprite_tile(5, 54);
+            set_sprite_tile(6, 56);
+            play_sound(0);
+        }
+
+        if (hazard_timer == 400) {
+            state = 2;
+        }
+    }
+}
+
+void reset_hammer() {
+    int i;
+    set_sprite_tile(3, 20);
+    set_sprite_tile(4, 22);
+    play_sound(0);
+    for(i = 0; i < 30; i+=1) {
+        gbt_update();
+        scroll_sprite(3, 0, -1);
+        scroll_sprite(4, 0, -1);
+        cicled_delay(1);
+    }
+    has_hammer = 0;
+    hammer_tile = 20;
+    set_sprite_tile(3, 20);
+    set_sprite_tile(4, 22);
+    move_sprite(3, 143, 134);
+    move_sprite(4, 151, 134);
+}
+
+void reset_hazard() {
+    can_generate_hazard = 1;
+    hazard_timer = 0;
+    hazard_room = -1;
+    thunder_active = 0;
+    move_sprite(5, 256, 256);
+    move_sprite(6, 256, 256);
+    set_sprite_tile(5, 50);
+    set_sprite_tile(6, 52);
+}
 
 void pickup_hammer(){
-    move_sprite(3, 240, 240);
-    move_sprite(4, 240, 240);
+    move_sprite(3, player_x - 2, player_y - 12);
+    move_sprite(4, player_x + 6, player_y - 12);
     play_sound(0);
     has_hammer = 1;
 }
@@ -72,6 +168,7 @@ void check_hammer_status(){
 }
 
 void open_ledge() {
+    SWITCH_ROM_MBC1(3);
     if (player_position == 6) {
         set_bkg_tiles(1, 4, 2, 1, 0x02);
     }
@@ -84,7 +181,8 @@ void open_ledge() {
 }
 
 void close_ledge() {
-    set_bkg_tiles(0, 0, 32, 32, Bg);
+    SWITCH_ROM_MBC1(3);
+    set_bkg_tiles(0, 0, 20, 18, Bg);
 }
 
 void requires_offset() {
@@ -92,48 +190,77 @@ void requires_offset() {
         scroll_sprite(0, +4, 0);
         scroll_sprite(1, +4, 0);
         scroll_sprite(2, +4, 0);
+        if (has_hammer) {
+            scroll_sprite(3, +4, 0);
+            scroll_sprite(4, +4, 0);
+        }
         player_x += 4;
     }
     if (player_direction == 2 && (player_position == 5 || player_position == 8 || player_position == 11)) {
         scroll_sprite(0, +2, 0);
         scroll_sprite(1, +2, 0);
         scroll_sprite(2, +2, 0);
+        if (has_hammer) {
+            scroll_sprite(3, +2, 0);
+            scroll_sprite(4, +2, 0);
+        }
         player_x += 2;
     }
     if (player_direction == 2 && player_position == 10) {
         scroll_sprite(0, -4, 0);
         scroll_sprite(1, -4, 0);
         scroll_sprite(2, -4, 0);
+        if (has_hammer) {
+            scroll_sprite(3, -4, 0);
+            scroll_sprite(4, -4, 0);
+        }
         player_x -= 4;
     }
     if (player_direction == 0 && (player_position == 9 || player_position == 6)) {
         scroll_sprite(0, -2, 0);
         scroll_sprite(1, -2, 0);
         scroll_sprite(2, -2, 0);
+        if (has_hammer) {
+            scroll_sprite(3, -2, 0);
+            scroll_sprite(4, -2, 0);
+        }
         player_x -= 2;
     }
     if (player_direction == 2 && (player_position == 9 || player_position == 6)) {
         scroll_sprite(0, -4, 0);
         scroll_sprite(1, -4, 0);
         scroll_sprite(2, -4, 0);
+        if (has_hammer) {
+            scroll_sprite(3, -4, 0);
+            scroll_sprite(4, -4, 0);
+        }
         player_x -= 4;
     }
     requires_scrolling_x = 0;
     has_reached = 1;
 }
-
+/*
+ */
 void scroll_player_sprite() {
     if (requires_scrolling_x == 1){
         if (player_x > player_new_x) {
             scroll_sprite(0, -2, 0);
             scroll_sprite(1, -2, 0);
             scroll_sprite(2, -2, 0);
+            if (has_hammer) {
+                scroll_sprite(3, -2, 0);
+                scroll_sprite(4, -2, 0);
+            }
             player_x -=2;
         }
         if (player_x < player_new_x) {
             scroll_sprite(0, 2, 0);
             scroll_sprite(1, 2, 0);
             scroll_sprite(2, 2, 0);
+            if (has_hammer) {
+                scroll_sprite(3, 2, 0);
+                scroll_sprite(4, 2, 0);
+            }
             player_x +=2;
         }
         if (player_x == player_new_x) {
@@ -146,6 +273,10 @@ void scroll_player_sprite() {
             scroll_sprite(0, 0, -2);
             scroll_sprite(1, 0, -2);
             scroll_sprite(2, 0, -2);
+            if (has_hammer) {
+                scroll_sprite(3, 0, -2);
+                scroll_sprite(4, 0, -2);
+            }
             player_y -=2;
         }
         if (player_y < player_new_y) {
@@ -153,6 +284,10 @@ void scroll_player_sprite() {
             scroll_sprite(0, 0, 2);
             scroll_sprite(1, 0, 2);
             scroll_sprite(2, 0, 2);
+            if (has_hammer) {
+                scroll_sprite(3, 0, 2);
+                scroll_sprite(4, 0, 2);
+            }
             player_y +=2;
         }
         if (player_y == player_new_y) {
@@ -200,7 +335,7 @@ void process_input() {
             if (has_reached == 1) {
                 has_reached = 0;
                 player_direction = 0;
-                requires_scrolling_x = 1;~
+                requires_scrolling_x = 1;
                 offset_x = 0;
                 process_player_position();
             }
@@ -223,6 +358,16 @@ void process_input() {
                 process_player_position();
             }
             break;
+
+        case J_A: 
+            if (has_hammer == 1) {
+                if (player_position == hazard_room && hazard_room != 2) {
+                    play_sound(0);
+                    reset_hazard();
+                    reset_hammer();
+                    score += 1;
+                }
+            }
     }
 }
 
@@ -259,21 +404,15 @@ void animate_player() {
             player_tile = 0;
         }
 
-        if (has_hammer == 0) {
-            if (hammer_tile <= 34) {
-                set_sprite_tile(3, hammer_tile);
-                set_sprite_tile(4, hammer_tile+2);
-                hammer_tile += 4;
-            }
-            else {
-                set_sprite_tile(3, 20);
-                set_sprite_tile(4, 22);
-                hammer_tile = 24;
-            }
+        if (hammer_tile <= 34) {
+            set_sprite_tile(3, hammer_tile);
+            set_sprite_tile(4, hammer_tile+2);
+            hammer_tile += 4;
         }
         else {
             set_sprite_tile(3, 20);
             set_sprite_tile(4, 22);
+            hammer_tile = 24;
         }
     }
     if (frame_counter <= 5) {
@@ -288,7 +427,7 @@ void init_game(){
     // Background
     SWITCH_ROM_MBC1(3);
     set_bkg_data(0, 20, BgTiles); 
-    set_bkg_tiles(0, 0, 32, 32, Bg);
+    set_bkg_tiles(0, 0, 20, 18, Bg);
     SPRITES_8x16;
     
     // Player
@@ -306,8 +445,14 @@ void init_game(){
     set_sprite_tile(4, 22);
     move_sprite(3, 143, 134);
     move_sprite(4, 151, 134);
+
+    // Breaks
+    set_sprite_data(50, 8, Breaks);
+    set_sprite_tile(5, 50);
+    set_sprite_tile(6, 52);
    
     // Show
     SHOW_SPRITES;
     fadein();
+    init_randomizer();
 }
