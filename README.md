@@ -1,5 +1,5 @@
 ![This Is Not A Drill: The Inside Job](https://img.itch.zone/aW1nLzEwMTc0MDQ3LnBuZw==/original/TaeGrh.png)
-# This Is Not A Drill: The Inside Job for the original Game Boy
+# This Is Not A Drill: The Inside Job for the Game Boy
 This game was made in a weekend for the Global Game Jam 2020 for which the theme was "Repair". The original entry can be found [here](https://globalgamejam.org/2020/games/not-drill-2). It follows the "Mi Casa es tu Casa" jam diversifier in which the game had to happen in the same universe as another game participating in the jam - that game was [This Is Not a Drill](https://globalgamejam.org/2020/games/not-drill-3).
 
 ## :video_game:	Gameplay
