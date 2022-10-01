@@ -58,7 +58,7 @@ void animate_menu() {
 
 void init_menu() {
     SWITCH_ROM_MBC1(3);
-    set_bkg_data(0x01, 133, MenuTiles); 
+    set_bkg_data(0x01, 180, MenuTiles); 
     set_bkg_tiles(0, 0, 20, 18, MenuMap);
     
     // Player
@@ -92,12 +92,8 @@ void scroll_menu_sprites() {
 
 /* Starts here */
 void main(){
+    int z = 0;
 
-    disable_interrupts();
-    gbt_play(song_Data, 2, 6);
-    gbt_loop(1);
-    set_interrupts(VBL_IFLAG);
-    enable_interrupts();
     DISPLAY_ON;
     
     splash();
@@ -111,7 +107,7 @@ void main(){
             cicled_delay(1);
             switch(joypad()) {
                 case J_START:
-                    waitpadup(J_START);
+                    waitpadup();
                     fadeout();
                     init_game();
                     state = 1;
@@ -119,7 +115,6 @@ void main(){
             }
         }
         while(state == 1){ // 3: Game loop
-            gbt_update();
             cicled_delay(1);
             animate_player();
             process_input();
@@ -137,7 +132,12 @@ void main(){
             show_hazard();
         }
         while(state == 2) { // 2: Game Over
-
+            waitpad(J_A);
+            fadeout();
+            reset_game();
+            init_menu();
+            fadein();
+            state = 0;
         }
     } 
 }

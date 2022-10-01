@@ -3,7 +3,6 @@
 #include <stdio.h> 
 #include <stdlib.h> 
 #include <rand.h>
-#include "vendor/gbt_player.h"
 
 /* Global variables */
 UINT8 state = 0;
